@@ -10,10 +10,12 @@ namespace Video_Game_Library_and_Wish_List
     {
         public string Title;
         public string System;
+        public string Category;
         public int Year;
-        public Game(string title, string system, int year)
+        public Game(string title, string category, string system, int year)
         {
             Title = title;
+            Category = category;
             System = system;
             Year = year;
         }

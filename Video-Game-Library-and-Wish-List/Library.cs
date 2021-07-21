@@ -20,7 +20,7 @@ namespace Video_Game_Library_and_Wish_List
             Console.WriteLine($"{this.NameOfList} \r\n");
             foreach(Game game in GamesList)
             {
-                Console.WriteLine($"Title: {game.Title}  System: {game.System}  Year: {game.Year}");
+                Console.WriteLine($"Title: {game.Title}  Category: {game.Category}  System: {game.System}  Year: {game.Year}");
             }
             Console.WriteLine();
         }

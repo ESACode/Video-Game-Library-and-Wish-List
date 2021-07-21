@@ -1,0 +1,128 @@
+﻿[
+  {
+    "Title": "Super Mario Odyssey",
+    "Category": "Platformer",
+    "System": "Nintendo Switch",
+    "Year": 2017,
+    "MetacriticScore": 97  
+  },
+  {
+    "Title": "Civilization VI",
+    "Category": "Strategy",
+    "System": "PC",
+    "Year": 2016,
+    "MetacriticScore": 88
+  },
+  {
+    "Title": "South Park: The Stick of Truth",
+    "Category": "RPG",
+    "System": "PS4",
+    "Year": 2014,
+    "MetacriticScore": 85
+  },
+  {
+    "Title": "God of War",
+    "Category": "Action Adventure",
+    "System": "PS4",
+    "Year": 2018,
+    "MetacriticScore": 94
+  },
+  {
+    "Title": "Apex Legends",
+    "Category": "Shooter",
+    "System": "PC",
+    "Year": 2019,
+    "MetacriticScore": 88
+  },
+  {
+    "Title": "Super Smash Bros. Ultimate",
+    "Category": "Fighting",
+    "System": "Nintendo Switch",
+    "Year": 2018,
+    "MetacriticScore": 93
+  },
+  {
+    "Title": "DOOM Eternal",
+    "Category": "Shooter",
+    "System": "PC",
+    "Year": 2020,
+    "MetacriticScore": 88
+  },
+  {
+    "Title": "Super Mario Maker 2",
+    "Category": "Platformer",
+    "System": "Nintendo Switch",
+    "Year": 2020,
+    "MetacriticScore": 88
+  },
+  {
+    "Title": "Mortal Kombat 11 Ultimate",
+    "Category": "Fighting",
+    "System": "PS5",
+    "Year": 2019,
+    "MetacriticScore": 88
+  },
+  {
+    "Title": "Persona 5 Royal",
+    "Category": "RPG",
+    "System": "PS4",
+    "Year": 2020,
+    "MetacriticScore": 95
+  },
+  {
+    "Title": "Dragon Ball FighterZ",
+    "Category": "Fighting",
+    "System": "PS4",
+    "Year": 2017,
+    "MetacriticScore": 87
+  },
+  {
+    "Title": "The Witcher 3: Wild Hunt",
+    "Category": "RPG",
+    "System": "PC",
+    "Year": 2015,
+    "MetacriticScore": 93
+  },
+  {
+    "Title": "Red Dead Redemption 2",
+    "Category": "Action Adventure",
+    "System": "PS4",
+    "Year": 2018,
+    "MetacriticScore": 97
+  },
+  {
+    "Title": "Overwatch",
+    "Category": "Shooter",
+    "System": "PC",
+    "Year": 2016,
+    "MetacriticScore": 91
+  },
+  {
+    "Title": "Age of Empires II",
+    "Category": "Strategy",
+    "System": "PC",
+    "Year": 1999,
+    "MetacriticScore": 92
+  },
+  {
+    "Title": "Ori and the Will of the Wisps",
+    "Category": "Platformer",
+    "System": "Nintendo Switch",
+    "Year": 2020,
+    "MetacriticScore": 2020
+  },
+  {
+    "Title": "Batman: Arkham City",
+    "Category": "Action Adventure",
+    "System": "PC",
+    "Year": 2011,
+    "MetacriticScore": 91
+  },
+  {
+    "Title": "XCOM 2",
+    "Category": "Strategy",
+    "System": "PC",
+    "Year": 2016,
+    "MetacriticScore": 88
+  }
+]
