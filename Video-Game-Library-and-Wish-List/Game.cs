@@ -11,8 +11,8 @@ namespace Video_Game_Library_and_Wish_List
         public string Title;
         public string System;
         public string Category;
-        public int Year;
-        public Game(string title, string category, string system, int year)
+        public string Year;
+        public Game(string title, string category, string system, string year)
         {
             Title = title;
             Category = category;

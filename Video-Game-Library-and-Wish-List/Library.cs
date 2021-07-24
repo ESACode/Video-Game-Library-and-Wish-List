@@ -23,7 +23,7 @@ namespace Video_Game_Library_and_Wish_List
             foreach(Game game in GamesList)
             {
                 int place = GamesList.IndexOf(game) + 1;
-                Console.WriteLine($"{place}: Title: {game.Title}  Category: {game.Category}  System: {game.System}  Year: {game.Year}");
+                Console.WriteLine($"{place}: Title: {game.Title} | Category: {game.Category} | System: {game.System} | Year: {game.Year}");
             }
             Console.WriteLine();
         }
