@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
-
 
 namespace Video_Game_Library_and_Wish_List
 {
@@ -34,13 +31,24 @@ namespace Video_Game_Library_and_Wish_List
 
             var sampleLibrary = new Library("Eric's Sample Library", sampleList);
 
-            //Store list of all user created Libraries and method to display them.
-            var listOfLibraries = new List<Library>();
+            //Store list of all user created Libraries loaded from json, if json is null, initialize list to empty
+            List<Library> listOfLibraries;
+            List<Library> userListOfLibraries = JsonConvert.DeserializeObject<List<Library>>(File.ReadAllText("SaveFile.json"));
+            if (userListOfLibraries == null)
+            {
+                listOfLibraries = new List<Library>();
+            }
+            else
+            {
+                listOfLibraries = userListOfLibraries;
+            }
+
+            //Method to disply list of libraries
             void displayAllLibraries()
-            { 
+            {
                 Console.WriteLine();
                 Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                Console.WriteLine($"List of all user created Libraries: \r\n");
+                Console.WriteLine($"List of all user created Libraries and Wish Lists: \r\n");
                 foreach (Library library in listOfLibraries)
                 {
                     int place = listOfLibraries.IndexOf(library) + 1;
@@ -48,9 +56,6 @@ namespace Video_Game_Library_and_Wish_List
                 }
                 Console.WriteLine();
             }
-
-            //Store list of all user created Wish Lists
-            var listOfWishLists = new List<WishList>();
 
             //Methord to handle CRUD work with user selected Library
             void workWithLibraryMenu(Library selectedLibrary)
@@ -84,6 +89,9 @@ namespace Video_Game_Library_and_Wish_List
                         Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                         Game gameToAdd = new Game(title, category, system, year);
                         selectedLibrary.AddToList(gameToAdd);
+                        Console.WriteLine("The game has been added\r\n");
+                        Console.WriteLine("Hit enter to see the updated list");
+                        Console.ReadLine();
                         selectedLibrary.Display(selectedLibrary.GamesList);
                     }
                     //B: Remove Game from Sample Library
@@ -108,16 +116,19 @@ namespace Video_Game_Library_and_Wish_List
                                 if (int.TryParse(removeSelection, out removeSelectionAsInt) && removeSelectionAsInt <= selectedLibrary.GamesList.Count() && removeSelectionAsInt > 0)
                                 {
                                     Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-
                                     selectedLibrary.RemoveFromList(removeSelectionAsInt);
+                                    Console.WriteLine("The selected game has been removed!");
+                                    Console.WriteLine("Hit enter to see the updated list");
+                                    Console.ReadLine();
                                     selectedLibrary.Display(selectedLibrary.GamesList);
                                     break;
                                 }
                                 else
                                 {
                                     Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                                    Console.WriteLine("Your selection was either not a number, or the number did not match the position of any game in the list.");
-                                    Console.WriteLine("Try again.");
+                                    Console.WriteLine("Your selection was either not a number, or the number did not match the position of any game in the list.\r\n");
+                                    Console.WriteLine("Hit enter to try again.");
+                                    Console.ReadLine();
                                     continue;
                                 }
                             }
@@ -159,8 +170,9 @@ namespace Video_Game_Library_and_Wish_List
             }
 
             //Master loop
-            while (true)  
+            while (true)
             {
+                //Main Menu 
                 Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 Console.WriteLine("Main Menu");
                 Console.WriteLine("(Remember to save before existing the program!)\r\n");
@@ -169,6 +181,7 @@ namespace Video_Game_Library_and_Wish_List
                 Console.WriteLine("B: Create your own Video Game Library or Wish List");
                 Console.WriteLine("C: View/Add/Remove from existing Library or Wish List");
                 Console.WriteLine("D: Use Video Game recommendation service");
+                Console.WriteLine("E: Delete an entire user created Library/Wish List");
                 Console.WriteLine("S: Save any user created Libraries and Wish Lists");
                 Console.WriteLine("Q: Quit the program \r\n");
                 Console.WriteLine("Enter your selection (Type \"A\", \"B\", or \"C\", etc.)");
@@ -202,24 +215,26 @@ namespace Video_Game_Library_and_Wish_List
                     var category = Console.ReadLine();
                     Console.WriteLine("What year was the game released?");
                     var year = Console.ReadLine();
-                    Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                    Console.WriteLine("Library/Wish List created!");
                     Game gameToAdd = new Game(title, category, system, year);
                     List<Game> newListGame = new List<Game>() { gameToAdd };
                     Library newLibrary = new Library(libraryName, newListGame);
                     listOfLibraries.Add(newLibrary);
 
                     displayAllLibraries();
+                    Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    Console.WriteLine("Library/Wish List created!");
+                    Console.WriteLine("Hit enter to go back to main menu");
+                    Console.ReadLine();
                 }
-                //C: CRUD with existing Library or Wish List
+                //C: Update an existing Library or Wish List
                 else if (userInput.KeyChar == 'C' || userInput.KeyChar == 'c')
                 {
-                    bool isEmpty = !listOfLibraries.Any();
-                    if (isEmpty)
+                    //Checks if there are libraries or not
+                    if (listOfLibraries.Any() == false)
                     {
                         Console.WriteLine();
                         Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                        Console.WriteLine("There are no user created libraries to work with, make one!");
+                        Console.WriteLine("There are no user created Libraries or Wish Lists to work with, make one!");
                     }
                     else
                     {
@@ -227,7 +242,7 @@ namespace Video_Game_Library_and_Wish_List
                         {
                             displayAllLibraries();
                             Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                            Console.WriteLine("Choose an existing library by it's number in the list or enter M to go back to the Main Menu");
+                            Console.WriteLine("Choose an existing Library/Wish List by it's number in the list or enter M to go back to the Main Menu");
                             var librarySelection = Console.ReadLine();
                             int librarySelectionAsInt;
                             if (int.TryParse(librarySelection, out librarySelectionAsInt) && librarySelectionAsInt <= listOfLibraries.Count() && librarySelectionAsInt > 0)
@@ -243,12 +258,12 @@ namespace Video_Game_Library_and_Wish_List
                             {
                                 Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                                 Console.WriteLine("Your selection was either not a number, or the number did not match the position of any Library/Wish List in the list.");
-                                Console.WriteLine("Try again.");
+                                Console.WriteLine("Hit enter to try again.");
+                                Console.ReadLine();
                                 continue;
                             }
                         }
                     }
-
                 }
                 //D: Recommendation service
                 else if (userInput.KeyChar == 'D' || userInput.KeyChar == 'd')
@@ -256,7 +271,7 @@ namespace Video_Game_Library_and_Wish_List
                     //Read from the Json file to create sample Wish List
                     List<WishListGame> recommendGamesList = JsonConvert.DeserializeObject<List<WishListGame>>(File.ReadAllText("RecommendGames.json"));
                     var recommendGamesLibrary = new WishList("Recommended Games List", recommendGamesList);
-                    //RecommendGamesLibrary.Display(RecommendGamesLibrary.WishGamesList);
+
                     while (true)
                     {
                         Console.WriteLine();
@@ -324,20 +339,83 @@ namespace Video_Game_Library_and_Wish_List
                         //Selection not valid
                         else
                         {
-                            Console.WriteLine("That was not a valid entry.  Please try again.");
+                            Console.WriteLine("That was not a valid entry.  Hit enter and try again.");
+                            Console.ReadLine();
                             continue;
                         }
                     }
                 }
+                //E: Delete an existing Library or Wish List
+                else if (userInput.KeyChar == 'E' || userInput.KeyChar == 'e')
+                {
+                    //If there are user created libraries or wish lists
+                    if (listOfLibraries.Any())
+                    {
+                        while (true)
+                        {
+                            displayAllLibraries();
+                            Console.WriteLine();
+                            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                            Console.WriteLine("Enter the Library/Wish List you want removed's numerical position in the list.\r\n");
+                            Console.WriteLine("(Type \"1\", \"2\", or \"3\", etc. and hit enter.  Enter \"B\" to go back to the previous menu");
+                            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                            string removeSelection = Console.ReadLine();
+                            if (removeSelection == "B" || removeSelection == "b")
+                            {
+                                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                                break;
+                            }
+                            else
+                            {
+                                int removeSelectionAsInt;
+                                if (int.TryParse(removeSelection, out removeSelectionAsInt) && removeSelectionAsInt <= listOfLibraries.Count() && removeSelectionAsInt > 0)
+                                {
+                                    Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+                                    listOfLibraries.RemoveAt(removeSelectionAsInt - 1);
+                                    displayAllLibraries();
+                                    Console.WriteLine("Selection has been deleted.");
+                                    Console.WriteLine("Hit enter to go back to main menu");
+                                    Console.ReadLine();
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                                    Console.WriteLine("Your selection was either not a number, or the number did not match the position of any game in the list.");
+                                    Console.WriteLine("Hit enter to try again.");
+                                    Console.ReadLine();
+                                    continue;
+                                }
+                            }
+                        }
+
+                    }    
+                    else
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        Console.WriteLine("There are no user created Libraries or Wish Lists to delete, make some first!");
+                    }
+                }
                 //S: Save all user created Libraries and Wish Lists
                 else if (userInput.KeyChar == 'S' || userInput.KeyChar == 's')
-                {
+                {                       
+                    File.WriteAllText("SaveFile.json", JsonConvert.SerializeObject(listOfLibraries));
 
+                    Console.WriteLine("Files have been saved!\r\n");
+                    Console.WriteLine("Press enter to go back to main menu");
+                    Console.ReadLine();
+                    Console.WriteLine();
+                    break;
                 }
                 //Non valid entry handling
                 else 
                 {
-                    Console.WriteLine("That was not a valid Entry.  Please try again. \r\n");
+                    Console.WriteLine();
+                    Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    Console.WriteLine("That was not a valid Entry.  Hit enter and try again.");
+                    Console.ReadLine();
                     continue;
                 } 
             }
