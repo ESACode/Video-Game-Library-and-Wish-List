@@ -1,6 +1,6 @@
 # Video-Game-Library-and-Wish-
 
-This app is a combination library and wish list app for video games.  The user can experiment with a sample library populated with content, or create any number of their own.  They can also use a recommendation feature that will suggest games to add to a wish list of their own based on the type of games they say they are interested in.  Any user created libraries can be both saved and edited.
+This app is a combination library and wish list app for video games.  The user can experiment with a sample library that is already populated with content, or create any number of their own.  They can also use a recommendation feature that will suggest games to add to a wish list of their own based on the type of games they say they are interested in.  Any user created libraries can be saved.
 
 5 Code Louisville Project requirements this webpage will satisfy are:
 
