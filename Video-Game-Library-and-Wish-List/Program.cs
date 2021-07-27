@@ -176,7 +176,7 @@ namespace Video_Game_Library_and_Wish_List
                 //Main Menu 
                 Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 Console.WriteLine("Main Menu");
-                Console.WriteLine("(Remember to save before existing the program!)\r\n");
+                Console.WriteLine("(Remember to save before exiting the program!)\r\n");
                 Console.WriteLine("Choose from the options below:\r\n");
                 Console.WriteLine("A: Work with a sample Video Game Library");
                 Console.WriteLine("B: Create your own Video Game Library or Wish List");
