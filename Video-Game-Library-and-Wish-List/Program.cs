@@ -10,7 +10,7 @@ namespace Video_Game_Library_and_Wish_List
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Eric's Video Game Library and Wishlish Application! \r\n");
+            Console.WriteLine("Welcome to Eric's Video Game Library and Wishlist Application! \r\n");
 
             //Read from this list to create sample library
             var sampleList = new List<Game>
